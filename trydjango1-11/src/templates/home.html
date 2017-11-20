@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ block.super }}
+<h1> Hello World!</h1>
+<p>This is {% verbatim %} {{ html_var }} {% endverbatim %} coming through </p>
+{% if num is not None%}
+
+<p>random num {{ num }}</p>
+
+{% endif %}
+
+<p>
+	{% for some_item in some_list %}
+	{% if some_item|divisibleby:"2" %}
+
+	Even number
+	{% endif %}
+
+	{{ some_item }} <br>
+
+	{% endfor %}
+
+	<p>Rendered text with {{ pub_date|date:"c" }}</p>
+	{% comment "Optional note" %}
+	<p>Commented out text with {{ create_date|date:"c" }}</p>
+	{% endcomment %}
+</p>
+<p>Some item is {{ some_item }}</p>
+
+{% endblock content %}
