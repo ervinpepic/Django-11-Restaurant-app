@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
+from django.core.urlresolvers import reverse
 
 from django.db import models
 from django.conf import settings
@@ -18,6 +19,9 @@ class Item(models.Model):
 
 	class Meta:
 		ordering = ['-updated', '-timestamp']
+
+	def get_absolute_url(self):
+		return reverse('menus:detail', kwargs={'pk': self.pk})
 	
 
 	def get_content(self):

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head_title %}Menu Items | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<h3>Location: <p>{{ object.restaurant.name }}</p></h3>
+
+{% if object.content %}
+
+Contentes
+<ul>
+	{% for item in object.get_content %}
+	<li>
+		{{ item }}
+	</li>
+
+	{% endfor %}
+
+</ul>
+
+{% endif %}
+
+{% if object.exclude %}
+Excludes
+<ul>
+	{% for item in object.get_exclude %}
+	<li>
+		{{ item }}
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock %}
