@@ -3,14 +3,16 @@
 {% block head_title %}Add Restaurant | {{ block.super }}{% endblock head_title %}
 
 {% block content %}
+
 <h1>Add Restaurant</h1>
-{% if form.errors %}
+
+{% if form.errors.non_field_errors %}
 	{{ form.errors }}
 {% endif %}
 
 <form method="POST"> {% csrf_token %}
 	{{ form.as_p }}
 	<button type="submit">Save</button>
-	
 </form>
+
 {% endblock %}
