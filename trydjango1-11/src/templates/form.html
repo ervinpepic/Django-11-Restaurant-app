@@ -6,14 +6,7 @@
 
 <h1>{{ title }}</h1>
 
-{% if form.errors.non_field_errors %}
-	{{ form.errors }}
-{% endif %}
-
-<form method="POST"> {% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Save</button>
-</form>
+{% include 'snippets/form-snippet.html' %}
 
 {% if form.instance %}
 	<h2>{{ form.instance.name }}</h2>

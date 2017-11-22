@@ -12,7 +12,7 @@ def validate_email(value):
 	if ".edu" in email:
 		raise ValidationError("We do not accept edu mail.")
 
-CATEGORIES = ['Mexican', 'Asian', 'American']
+CATEGORIES = ['Mexican', 'Asian', 'American', 'Kuhinja', 'Narodna Kuhinja']
 
 
 def validate_category(value):
