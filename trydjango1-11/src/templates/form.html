@@ -15,4 +15,10 @@
 	<button type="submit">Save</button>
 </form>
 
+{% if form.instance %}
+	<h2>{{ form.instance.name }}</h2>
+{% endif %}
+
+
+
 {% endblock %}
