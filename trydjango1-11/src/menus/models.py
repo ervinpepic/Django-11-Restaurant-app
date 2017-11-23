@@ -3,6 +3,7 @@
 from django.core.urlresolvers import reverse
 
 from django.db import models
+
 from django.conf import settings
 from restaurants.models import RestaurantLocation
 
@@ -18,7 +19,6 @@ class Item(models.Model):
 
 	def __str__(self):
 		return self.name
-
 
 	class Meta:
 		ordering = ['-updated', '-timestamp']
