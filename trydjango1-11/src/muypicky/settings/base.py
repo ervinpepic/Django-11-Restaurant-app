@@ -27,6 +27,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.google.com'
+EMAIL_HOST_USER = 'e@e.com'
+EMAIL_HOST_PASSWORD = 'pass'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = ''
+
+ADMINS = (
+
+    ('e', 'e'),
+
+    )
+MANAGERS = ADMINS
+
 
 # Application definition
 
@@ -123,3 +137,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'

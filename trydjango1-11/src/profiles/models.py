@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.db.models.signals import post_save
 from django.conf import settings
+from django.core.mail import send_mail
+from .utils import code_generator
+from django.core.urlresolvers import reverse
 
 User = settings.AUTH_USER_MODEL
 
@@ -25,6 +28,7 @@ class Profile(models.Model):
 	user    	= models.OneToOneField(User)
 	followers	= models.ManyToManyField(User, related_name='is_following', blank=True)
 	#following	= models.ManyToManyField(User, related_name='following', blank=True)
+	activation_key = models.CharField(max_length=12, blank=True, null=True)
 	activated 	= models.BooleanField(default=False)
 	timestamp	= models.DateTimeField(auto_now_add=True)
 	updated 	= models.DateTimeField(auto_now=True)
@@ -33,6 +37,29 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+	def send_activation_email(self):
+		if not self.activated:
+			self.activation_key = code_generator()
+			self.save()
+			path = reverse('activate', kwargs={"code": self.activation_key})
+			subject = 'Confirm your mail.'
+			from_email = settings.DEFAULT_FROM_EMAIL
+			message = f'activate your account here: {path}'
+			recipient_list = [self.user.email]
+			html_message = f'<p>Activate your account here: {path}</p>'
+			print(html_message)
+			# sent_mail = send_mail(
+			# 	subject,
+			# 	message,
+			# 	from_email,
+			# 	recipient_list,
+			# 	fail_silently=False,
+			# 	html_message=html_message)
+			sent_mail = False
+			return sent_mail
+			
+		
 
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
